@@ -1,0 +1,66 @@
+pipeline{
+
+    agent any
+    stages{
+
+        stage('checkout'){
+
+            steps{
+
+                git branch:'main',url:'https://github.com/anir7702/python-web-app.git'
+
+            }
+
+        }
+
+        stage('Install Dependencies'){
+
+            steps{
+
+                sh 'pip install -r requirements.txt'
+
+            }
+
+        }
+
+        stage('Test'){
+
+            steps{
+
+                sh 'export PATH="/usr/local/bin/pytest"'
+
+            }
+
+        }
+
+        stage('Build'){
+
+            steps{
+
+                sh 'docker build -t vanirvaj -f Dockerfile .'
+
+                sh 'docker run -d -p 5011:5000 vanirvaj'
+
+            }
+
+        }
+
+    }
+
+    post{
+
+        success{
+
+            echo 'Pipeline succeeded! succeeded in Deployment.'
+
+        }
+
+        failure{
+
+            echo 'Pipeline failed! failed in Deployment .'
+
+        }
+
+    }
+
+}
