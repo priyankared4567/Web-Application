@@ -7,7 +7,7 @@ pipeline{
 
             steps{
 
-                git branch:'main',url:'https://github.com/anir7702/python-web-app.git'
+                git branch:'main',url:'https://github.com/priyankared4567/Web-Application.git'
 
             }
 
@@ -37,9 +37,9 @@ pipeline{
 
             steps{
 
-                sh 'docker build -t vanirvaj -f Dockerfile .'
+                sh 'docker build -t testing -f Dockerfile .'
 
-                sh 'docker run -d -p 5011:5000 vanirvaj'
+                sh 'docker run -d -p 5000:5000 testing'
 
             }
 
